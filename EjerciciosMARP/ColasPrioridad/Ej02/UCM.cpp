@@ -43,17 +43,15 @@ bool resuelveCaso() {
 
 	priority_queue<Profile> registry;
 	int threshold, identf;
-
-	// resolver el caso posiblemente llamando a otras funciones
 	for (int i = 0; i < n; i++) {
 		cin >> identf >> threshold ;
 		registry.push({ threshold, identf, threshold });
 	}
 
+	// resolver el caso posiblemente llamando a otras funciones
+	// escribir la solución
 	int send;
 	cin >> send;
-
-	// escribir la solución
 	while (send) {
 		Profile p = registry.top(); registry.pop();
 		cout << p.id << "\n";

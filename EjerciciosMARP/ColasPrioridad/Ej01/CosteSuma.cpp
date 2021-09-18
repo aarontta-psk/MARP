@@ -23,15 +23,6 @@ using namespace std;
  // Escribe el código completo de tu solución aquí debajo
  // ================================================================
  //@ <answer>
-struct Profile {
-	int next_message; // next message scheduled
-	int id; // personal id
-	int message_period; // receiving message threshold
-};
-
-bool operator<(Profile const& a, Profile const& b) {
-	return b.next_message < a.next_message || (b.next_message == a.next_message && b.id < a.id);
-}
 
 bool resuelveCaso() {
 
@@ -41,28 +32,24 @@ bool resuelveCaso() {
 	if (n == 0)
 		return false;
 
-	priority_queue<Profile> registry;
-	int threshold, identf;
-
-	// resolver el caso posiblemente llamando a otras funciones
+	priority_queue<int64_t, vector<int64_t>, greater<int64_t>> sumQueue;
+	int readNum;
 	for (int i = 0; i < n; i++) {
-		cin >> identf >> threshold ;
-		registry.push({ threshold, identf, threshold });
+		cin >> readNum;
+		sumQueue.push(readNum);
 	}
-
-	int send;
-	cin >> send;
-
+	
+	// resolver el caso posiblemente llamando a otras funciones
+	int64_t sum = 0;
+	while (sumQueue.size() != 1) {
+		int64_t prioSum = sumQueue.top(); sumQueue.pop(); // first element
+		prioSum += sumQueue.top(); sumQueue.pop();    // first + second element
+		sum += prioSum;								  // accumulated addition
+		sumQueue.push(prioSum);
+	}
+	
 	// escribir la solución
-	while (send) {
-		Profile p = registry.top(); registry.pop();
-		cout << p.id << "\n";
-		p.next_message += p.message_period;
-		registry.push(p);
-		send--;
-	}
-
-	cout << "---" << "\n";
+	cout << sum << "\n";
 
 	return true;
 }
