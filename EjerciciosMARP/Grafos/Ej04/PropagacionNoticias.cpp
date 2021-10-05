@@ -9,7 +9,7 @@
 
 using namespace std;
 
-#include "NumMaxAmigos.h"  // propios o los de las estructuras de datos de clase
+#include "NewsDistribution.h"  // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
 
@@ -36,17 +36,30 @@ bool resuelveCaso() {
 	Grafo graph(n);
 
 	for (int i = 0; i < m; i++) {
-		int firstV, secondV;
-		cin >> firstV >> secondV;
+		int indice, firstV, secondV;
+		cin >> indice;
 
-		graph.ponArista(--firstV, --secondV);
+		if (indice >= 1) {
+			cin >> firstV;
+
+			if (indice > 1) {
+
+				for (int i = 1; i < indice; i++) {
+					cin >> secondV;
+					graph.ponArista(firstV - 1, secondV - 1);
+					firstV = secondV;
+				}
+			}
+		}
 	}
 
 	// resolver el caso posiblemente llamando a otras funciones
-	MaxNumFriends sol(graph, 0);
+	NewsDistribution sol(graph);
 
 	// escribir la solución
-	cout << sol.maxFriends() << "\n";
+	for (int conn : sol.numConnections())
+		cout << conn << " ";
+	cout << "\n";
 
 	return true;
 }
@@ -61,10 +74,7 @@ int main() {
 	auto cinbuf = std::cin.rdbuf(in.rdbuf());
 #endif
 
-	int numCasos;
-	std::cin >> numCasos;
-	for (int i = 0; i < numCasos; ++i)
-		resuelveCaso();
+	while (resuelveCaso());
 
 	// para dejar todo como estaba al principio
 #ifndef DOMJUDGE

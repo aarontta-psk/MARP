@@ -9,7 +9,7 @@
 
 using namespace std;
 
-#include "NumMaxAmigos.h"  // propios o los de las estructuras de datos de clase
+#include "TTLTrial.h"  // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
 
@@ -28,25 +28,33 @@ using namespace std;
 bool resuelveCaso() {
 
 	// leer los datos de la entrada
-	int n, m;
-	cin >> n >> m;
+	int n, c;
+	cin >> n >> c;
 	if (!std::cin)  // fin de la entrada
 		return false;
 
 	Grafo graph(n);
 
-	for (int i = 0; i < m; i++) {
+	for (int i = 0; i < c; i++) {
 		int firstV, secondV;
 		cin >> firstV >> secondV;
-
-		graph.ponArista(--firstV, --secondV);
+		graph.ponArista(firstV - 1, secondV - 1);
 	}
 
 	// resolver el caso posiblemente llamando a otras funciones
-	MaxNumFriends sol(graph, 0);
+	int k;
+	cin >> k;
 
-	// escribir la solución
-	cout << sol.maxFriends() << "\n";
+	for (int j = 0; j < k; j++) {
+		int og, ttl;
+		cin >> og >> ttl;
+		TTLTrial sol(graph, --og, ttl);
+
+		// escribir la solución
+		cout << sol.notCheckedNodes() << "\n";
+	}
+
+	cout << "---\n";
 
 	return true;
 }
@@ -61,10 +69,7 @@ int main() {
 	auto cinbuf = std::cin.rdbuf(in.rdbuf());
 #endif
 
-	int numCasos;
-	std::cin >> numCasos;
-	for (int i = 0; i < numCasos; ++i)
-		resuelveCaso();
+	while (resuelveCaso());
 
 	// para dejar todo como estaba al principio
 #ifndef DOMJUDGE

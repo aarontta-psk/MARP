@@ -9,7 +9,7 @@
 
 using namespace std;
 
-#include "NumMaxAmigos.h"  // propios o los de las estructuras de datos de clase
+#include "BiggerStain.h"  // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
 
@@ -28,22 +28,26 @@ using namespace std;
 bool resuelveCaso() {
 
 	// leer los datos de la entrada
-	int n, m;
-	cin >> n >> m;
+	int f, c;
+	cin >> f >> c;
 	if (!std::cin)  // fin de la entrada
 		return false;
-	
-	Grafo graph(n);
 
-	for (int i = 0; i < m; i++) {
+	Grafo graph(f * c);
+
+	for (int i = 0; i < f; i++) {
 		int firstV, secondV;
-		cin >> firstV >> secondV;
+		cin >> firstV;
 
-		graph.ponArista(--firstV, --secondV);
+		for (int j = 0; j < c; j++) {
+			cin >> secondV;
+			graph.ponArista(--firstV, --secondV);
+			firstV = secondV;
+		}
 	}
 
 	// resolver el caso posiblemente llamando a otras funciones
-	MaxNumFriends sol(graph, 0);
+	BiggerStain sol(graph);
 
 	// escribir la solución
 	cout << sol.maxFriends() << "\n";

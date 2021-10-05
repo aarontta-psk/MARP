@@ -1,12 +1,12 @@
-#ifndef MAXNUMFRIENDS_H_
-#define MAXNUMFRIENDS_H_
+#ifndef BIGGERSTAIN_H_
+#define BIGGERSTAIN_H_
 
 #include <vector>
 #include "Grafo.h"
 
-class MaxNumFriends {
+class BiggerStain {
 public:
-	MaxNumFriends(Grafo const& g, int og) : visited(g.V(), false), maximum(0) {
+	BiggerStain(Grafo const& g) : visited(g.V(), false), maximum(0) {
 		for (int vert = 0; vert < g.V(); vert++) {
 			if (!visited[vert]) {
 				int maxi = dfs(g, vert);
