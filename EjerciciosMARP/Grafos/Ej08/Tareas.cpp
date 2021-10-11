@@ -9,7 +9,7 @@
 
 using namespace std;
 
-#include "BiggerStain.h"  // propios o los de las estructuras de datos de clase
+#include "Tasks.h"  // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
 
@@ -28,22 +28,29 @@ using namespace std;
 bool resuelveCaso() {
 
 	// leer los datos de la entrada
-	int f, c;
-	cin >> f >> c;
+	int n, m;
+	cin >> n >> m;
 	if (!std::cin)  // fin de la entrada
 		return false;
 
-	Mapa map(f);
-
-	for (string& line : map) {
-		cin >> line;
+	// resolver el caso posiblemente llamando a otras funciones
+	Digrafo graph(n);
+	for (size_t i = 0; i < m; i++) {
+		int firstV, secondV;
+		cin >> firstV >> secondV;
+		graph.ponArista(--firstV, --secondV);
 	}
 
-	// resolver el caso posiblemente llamando a otras funciones
-	BiggerStain sol(map);
+	Tasks sol(graph);
 
 	// escribir la solución
-	cout << sol.stains() << " " << sol.biggerStain() << "\n";
+	if (sol.taskQueue().empty())
+		cout << "Imposible";
+	else
+		for (int vert : sol.taskQueue())
+			cout << ++vert << " ";
+
+	cout << "\n";
 
 	return true;
 }
