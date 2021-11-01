@@ -9,17 +9,18 @@ using namespace std;
 
 class Drain {
 public:
-	Drain(Digrafo const& g) : visited(g.V(), false), inAndOut(g.V(), { 0, 0 }), dr(-1) {
-		for (size_t vert = 0; vert < g.V(); vert++) 
-			if (!visited[vert])
-				dfs(g, vert);
+	Drain(Digrafo const& g) : dr(-1) {
+		int candidato = 0;
+		for (size_t vert = 1; vert < g.V(); vert++) 
+			if (g.hayArista(candidato, vert))
+				candidato = vert;
 
-		int step = 0;
-		while (step < g.V() && (inAndOut[step].first != g.V() - 1 || inAndOut[step].second != 0))
-			step++;
+		int vrt = 0;
+		while (vrt < g.V() && (candidato == vrt || (g.hayArista(vrt, candidato) && !g.hayArista(candidato, vrt))))
+			vrt++;
 
-		if (step != g.V())
-			dr = step;
+		if (vrt == g.V())
+			dr = candidato;
 	}
 
 	int const& drain() {
@@ -27,22 +28,7 @@ public:
 	}
 
 private:
-	vector<bool> visited;
-	vector<pair<int, int>> inAndOut;
-	int dr, step;
-
-	void dfs(Digrafo const& g, int vert) {
-		visited[vert] = true;
-		inAndOut[vert].second = g.ady(vert).size();
-
-		for (int ady : g.ady(vert)) {
-			inAndOut[ady].first++;
-			if (inAndOut[ady].first == g.V() - 1)
-				step = ady;
-			if (!visited[ady])
-				dfs(g, ady);
-		}
-	}
+	int dr;
 };
 
 #endif
