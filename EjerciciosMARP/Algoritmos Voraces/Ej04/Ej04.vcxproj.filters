@@ -18,7 +18,7 @@
     <Text Include="casos.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Invasion.cpp">
+    <ClCompile Include="MaratonCine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
