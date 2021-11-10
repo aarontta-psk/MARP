@@ -29,7 +29,7 @@ struct Works {
 	int bg, end;
 
 	bool operator < (const Works& h) const {
-		return bg < h.bg || (bg == h.bg && end < h.end);
+		return bg < h.bg;
 	}
 };
 
@@ -39,43 +39,31 @@ istream& operator>>(istream& in, Works& h) {
 }
 
 int numWorks(vector<Works> works, int c, int f) {
-	int bgIdx = 0;
+	Works timeCovered = { c, c };
+	int num = 1; int bgIdx = 0;
 
-	// first work that is on the threshold
-	while (bgIdx < works.size() && (works[bgIdx].bg >= f || works[bgIdx].end <= c))
-		bgIdx++;
+	while (bgIdx < works.size()) {
+		if (works[bgIdx].bg > timeCovered.bg && works[bgIdx].bg > timeCovered.end)
+			return -1;
 
-	if (bgIdx == works.size() || works[bgIdx].bg > c) // if there's no work in the threshold, or the first one doesn't cover the bg
-		return -1;
-
-	vector<Works> tempWorks; tempWorks.push_back(works[bgIdx]);
-	Works tempWork = { -1, -1 };
-	bgIdx++;
-	while (bgIdx < works.size() && tempWorks[tempWorks.size() - 1].end < f) {
-		if (works[bgIdx].bg > tempWorks[tempWorks.size() - 1].end) {
-			if (works[bgIdx].bg > tempWork.end)
-				break;
-			else {
-				tempWorks.push_back(tempWork);
-				tempWork = works[bgIdx];
-			}
+		if (works[bgIdx].bg <= timeCovered.bg)
+			timeCovered.end = max(timeCovered.end, works[bgIdx].end);
+		else {
+			timeCovered.bg = max(timeCovered.end, works[bgIdx].bg);
+			timeCovered.end = max(timeCovered.end, works[bgIdx].end);
+			num++;
 		}
 
-		if (works[bgIdx].bg <= tempWorks[tempWorks.size() - 1].end &&
-			works[bgIdx].end - tempWorks[tempWorks.size() - 1].end > tempWork.end - tempWorks[tempWorks.size() - 1].end) {
-			tempWork = works[bgIdx];
-		}
 		++bgIdx;
+
+		if (timeCovered.end >= f)
+			break;
 	}
 
-	if (bgIdx == works.size() && tempWorks[tempWorks.size() - 1].end < f &&
-		tempWork.end > tempWorks[tempWorks.size() - 1].end)
-		tempWorks.push_back(tempWork);
-
-	if (tempWorks[tempWorks.size() - 1].end < f)
+	if (timeCovered.end < f)
 		return -1;
 
-	return tempWorks.size();
+	return num;
 }
 
 bool resuelveCaso() {
