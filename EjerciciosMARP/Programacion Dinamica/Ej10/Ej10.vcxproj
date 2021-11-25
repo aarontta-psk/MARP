@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{c53ab731-fe4d-48f8-9cce-fb438e8ec69a}</ProjectGuid>
-    <RootNamespace>MARPEJERCICIO45</RootNamespace>
+    <ProjectGuid>{5d425249-14b2-4484-ad69-0e2c85247b56}</ProjectGuid>
+    <RootNamespace>Ej10</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,11 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="3.CasosIlimitados.cpp" />
+    <Text Include="casos.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnterosInf.h" />
     <ClInclude Include="Matriz.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Subsecuencia.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

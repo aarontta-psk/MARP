@@ -31,7 +31,7 @@ int palin(string const& word, unsigned int i, unsigned int j, Matriz<int>& palin
 	int& res = palindrome[i][j];
 	if (res == -1) {
 		if (i >= j) palindrome[i][j] = 0;
-		else if (word[i] == word[j])
+		else if (word[i - 1] == word[j - 1])
 			palindrome[i][j] = palin(word, i + 1, j - 1, palindrome);
 		else
 			palindrome[i][j] = min(palin(word, i + 1, j, palindrome),
