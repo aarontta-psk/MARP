@@ -13,10 +13,9 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <string>
 #include <vector>
 #include <limits>
-
-#include "Guards.h"
 
 using namespace std;
 
@@ -41,24 +40,28 @@ using namespace std;
 bool resuelveCaso() {
 
 	// leemos la entrada
-	int N, C;
-	cin >> N >> C;
+	int N;
+	cin >> N;
 	if (!cin)
 		return false;
 
 	// leer el resto del caso y resolverlo
-	Grafo graph(N);
-	for (size_t i = 0; i < C; i++) {
-		int og, dst; cin >> og >> dst;
-		graph.ponArista(--og, --dst);
+	vector<int> books(N);
+	for (size_t i = 0; i < N; i++) 
+	     cin >> books[i];
+	
+	sort(books.begin(), books.end());
+
+	int discount = 0, counter = 0;
+	for (int i = N - 1; i >= 0; i--) {
+		counter++;
+		if (counter == 3) {
+			counter = 0;
+			discount += books[i];
+		}
 	}
 
-	Guards<int> sol(graph);
-
-	if (sol.isViable())
-		cout << sol.numGuards() << "\n";
-	else
-		cout << "IMPOSIBLE" << "\n";
+	cout << discount << "\n";
 
 	return true;
 }

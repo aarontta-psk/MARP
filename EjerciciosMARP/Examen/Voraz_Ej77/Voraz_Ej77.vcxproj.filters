@@ -15,34 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConjuntosDisjuntos.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DigrafoValorado.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Grafo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GrafoValorado.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IndexPQ.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PriorityQueue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Guards.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <Text Include="casos.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="casos.txt" />
   </ItemGroup>
 </Project>

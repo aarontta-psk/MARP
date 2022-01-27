@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{c4acb03a-b7fb-4d61-94d2-0744877a28ff}</ProjectGuid>
-    <RootNamespace>GrafosEj79</RootNamespace>
+    <ProjectGuid>{ce3d7864-fdba-4bf6-b31c-2a333e8ecb60}</ProjectGuid>
+    <RootNamespace>DinamicaEj81</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,19 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ConjuntosDisjuntos.h" />
-    <ClInclude Include="DigrafoValorado.h" />
-    <ClInclude Include="Grafo.h" />
-    <ClInclude Include="GrafoValorado.h" />
-    <ClInclude Include="IndexPQ.h" />
-    <ClInclude Include="Guards.h" />
-    <ClInclude Include="PriorityQueue.h" />
+    <Text Include="casos.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EnterosInf.h" />
+    <ClInclude Include="Matriz.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="casos.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
